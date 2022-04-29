@@ -113,10 +113,10 @@ export default function App() {
           articles.map((art) => {
             return art.article_id === article_id ? res.data.article : art;
           })
-        )
-        setMessage(res.data.message)
-        setCurrentArticleId()
-        
+        );
+        setMessage(res.data.message);
+        setCurrentArticleId();
+
         setSpinnerOn(false);
       })
       .catch((err) => {
@@ -132,9 +132,11 @@ export default function App() {
       .delete(`${articlesUrl}/${article_id}`)
       .then((res) => {
         setMessage(res.data.message);
-        setArticles(articles.filter(art=>{
-          return art.article_id !==article_id
-        }))
+        setArticles(
+          articles.filter((art) => {
+            return art.article_id !== article_id;
+          })
+        );
         setSpinnerOn(false);
       })
       .catch((err) => {
@@ -158,7 +160,10 @@ export default function App() {
           <NavLink id="loginScreen" to="/">
             Login
           </NavLink>
-          <NavLink id="articlesScreen" to="/articles">
+          <NavLink
+            id="articlesScreen"
+            to={localStorage.getItem("token") ? "/articles" : "/"}
+          >
             Articles
           </NavLink>
         </nav>
